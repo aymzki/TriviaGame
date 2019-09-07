@@ -1,3 +1,21 @@
-body {
-    background-image: url("/assets/images/pexels-photo-717130.jpeg");
+h1{
+    color: white;
 }
+
+h2 {
+    color: white;
+}
+
+p {
+    color: white;
+}
+
+html { 
+    background: url(../images/pexels-photo-717130.jpeg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+
