@@ -168,7 +168,6 @@ $(document).ready(() => {
         setTimeout(nextDisplay, 3000);
     }
 
-    //With no user input, it goes to the next question
     //When time remaining = 0. show correct answer, with no user input, go to next question
     function youLoseAtTimeOut() {
         unanswered++;
@@ -176,6 +175,24 @@ $(document).ready(() => {
         $(".mainContent").html(timeOutText);
         setTimeout(nextDisplay, 3000);
     }
+
+    
+    //With no user input, it goes to the next question, increments question counter, reset timer
+    function nextDisplay() {
+
+		if (questionCounter < questionArray.length - 1) {
+            questionCounter++;
+            generateGameText();
+            counter = 20;
+            timer();
+
+		} else {
+            lastScreen();
+		}
+
+	}
+
+
     //Last page-- show Correct, Incorrect, and Unanswered
     //Click Start Over button to restart 
 
