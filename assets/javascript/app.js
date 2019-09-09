@@ -112,7 +112,7 @@ $(document).ready(function() {
         $(".mainContent").html(gameText);
         for (var i = 0; i < questionArray[questionCounter].answers.length; i++) {
             var answerButton = $("<button>");
-            answerButton.addClass("answer btn btn-block text-center");
+            answerButton.addClass("answer btn-lg text-center");
             answerButton.attr("isCorrect", questionArray[questionCounter].answers[i].isCorrect);
             answerButton.html(questionArray[questionCounter].answers[i].text);
             $(".mainContent").append(answerButton);
@@ -122,7 +122,7 @@ $(document).ready(function() {
     //Create initial screen and start button
     function initialScreen() {
         var initialText = "<p class='initialText text-center'>Do you know all about bread?</p> <p class='initialText text-center'>There are 10 questions total and you will have 20 seconds to answer each one. Have fun!</p>";
-        var startButtonHTML = "<button class='startButton btn btn-group-small my-small-btn text-center' type='button'>Let's get started!</button>";
+        var startButtonHTML = "<button class='startButton btn-lg text-center' type='button'>Let's get started!</button>";
         startScreen = initialText + startButtonHTML;
         $(".mainContent").html(startScreen);
     }
@@ -201,8 +201,10 @@ $(document).ready(function() {
             generateGameText();
             counter = 20;
             timer();
+            //need help moving onto the last screen!!!
 
-		} else {
+        } 
+        else {
             lastScreen();
 		}
 
@@ -219,9 +221,11 @@ $(document).ready(function() {
 
 		var endUnansweredHTML = "<p class='endUnanswered text-center'>Unanswered: " + unanswered + "</p>";
 
-		var resetButtonHTML = "<button class='resetButton btn btn-primary btn-sm btn-block text-center' type='button'>PLAY AGAIN</button>";
+		var resetButtonHTML = "<button class='resetButton btn btn-info btn-lg text-center' type='button'>PLAY AGAIN</button>";
 
-		gameHTML = finishedText + endRightHTML + endWrongHTML + endUnansweredHTML + resetButtonHTML;
+        gameHTML = finishedText + endRightHTML + endWrongHTML + endUnansweredHTML + 
+        
+        resetButtonHTML;
 
 		$(".mainContent").html(gameText);
 

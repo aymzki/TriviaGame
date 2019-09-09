@@ -1,10 +1,20 @@
 h1{
-    color: black; 
+    color: black;
     font-size: 40px;
     padding: 20px;
     font-family: 'Permanent Marker', 'Pacifico', cursive;
     
 }
+
+.container{
+    margin: auto;
+	width: 50%;
+}
+
+button{
+    margin: 10px;
+    width: 200px;
+  }
 
 .mainContent{
     color:black;
