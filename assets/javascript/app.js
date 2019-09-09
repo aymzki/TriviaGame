@@ -1,9 +1,9 @@
-$(document).ready(() => {
+$(document).ready(function() {
 
     //list of variables
     var beginGame;
     var gameText;
-    var right = 0;
+    var right = 0;ß
     var wrong = 0;
     var unanswered = 0;
     var questionCounter = 0;
@@ -126,11 +126,27 @@ $(document).ready(() => {
         startScreen = initialText + startButtonHTML;
         $(".mainContent").html(startScreen);
     }
-    //Click start button to begin, generates game text, 
+    //Click start button to begin, generates game text
 
     $("body").on("click", ".startButton", function (event) {
         generateGameText();
         timer();
+    });
+
+    // When an answer is clicked:
+
+	$("body").on("click", ".answer", function(event){
+        answerChosen = $(this).attr("isCorrect");
+        console.log(answerChosen);
+        
+        if (answerChosen === "true") {
+            clearInterval(clock);
+            youGotItRight();
+        }
+        else {
+            clearInterval(clock);
+            youGotItWrong();ß
+        }
     });
 
     //Set up timer for 20 seconds
@@ -192,10 +208,10 @@ $(document).ready(() => {
 
 	}
 
-    //Last page-- show Correct, Incorrect, and Unanswered
+    //Last page-- show Right, Wrong, and Unanswered
     function lastScreen() {
 
-		var finishedText = "<p class='finishedText text-center'>Here's your results!</p>";
+		var finishedText = "<p class='finishedText text-center'>Here are your results!</p>";
 
 		var endRightHTML = "<p class='endRight text-center'>Right Answers: " + right + "</p>";
 
@@ -209,8 +225,24 @@ $(document).ready(() => {
 
 		$(".mainContent").html(gameText);
 
+    }
+    
+    //reset game
+    function resetGame() {
+		questionCounter = 0;
+        correct = 0;
+        incorrect = 0;
+        unanswered = 0;
+        counter = 20;
+
+		generateGameText();
+        timer();
 	}
 
-    //Click Start Over button to restart 
+    //Click Start button to restart 
+    // When the start button is clicked:
+
+	
+
 
 });
