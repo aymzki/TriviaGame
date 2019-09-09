@@ -121,7 +121,7 @@ $(document).ready(function() {
 
     //Create initial screen and start button
     function initialScreen() {
-        var initialText = "<p class='initialText text-center'>Do you know all about bread?</p> <p class='initialText text-center'>There are 10 questions total and you will have 20 seconds to answer each one. Have fun!</p>";
+        var initialText = "<p class='initialText text-center'>Do you know all about bread?</p> <p class='initialText text-center'>In this qiuz there are 10 questions total and you will have 20 seconds to answer each one.</p>";
         var startButtonHTML = "<button class='startButton btn-lg text-center' type='button'>Let's get started!</button>";
         startScreen = initialText + startButtonHTML;
         $(".mainContent").html(startScreen);
