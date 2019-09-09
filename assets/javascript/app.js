@@ -148,35 +148,35 @@ $(document).ready(() => {
             $("#timer").html(counter);
             console.log(counter);
         }
+    }
 
+    //Show Time Remaining and Question with 3-4 choices
+    //Upon clicking correct answer, Success!
+    function youGotItRight() {
+        right++;
+        var rightAnswerText = "<p class='rightAnswer text-center'>Success!</p>";
+        $(".mainContent").html(rightAnswerText);
+        setTimeout(nextDisplay, 3000);
+    }
 
-        //Show Time Remaining and Question with 3-4 choices
-        //Upon clicking correct answer, Success!
-        function youGotItRight() {
-            right++;
-            var rightAnswerText = "<p class='rightAnswer text-center'>Success!</p>";
-            $(".mainContent").html(rightAnswerText);
-            setTimeout(nextDisplay, 3000);
-        }
+    //Upon clicking wrong answer, indicate it's wrong. Give user the correct answer.
+    function youGotItWrong() {
+        wrong++;
+        var wrongAnswerText = "<p class='wrongAnswer text-center'>Wrong Answer!</p>";
+        gameText = wrongAnswerText
+        $(".mainContent").html(wrongAnswerText);
+        setTimeout(nextDisplay, 3000);
+    }
 
-        //Upon clicking wrong answer, indicate it's wrong. Give user the correct answer.
-        function youGotItWrong() {
-            wrong++;
-            var wrongAnswerText = "<p class='wrongAnswer text-center'>Wrong Answer!</p>";
-            gameText = wrongAnswerText
-            $(".mainContent").html(wrongAnswerText);
-            setTimeout(nextDisplay, 3000);
-        }
+    //With no user input, it goes to the next question
+    //When time remaining = 0. show correct answer, with no user input, go to next question
+    function youLoseAtTimeOut() {
+        unanswered++;
+        var timeOutText = "<p class='timeOutText text-center'>Time's Up!</p>";
+        $(".mainContent").html(timeOutText);
+        setTimeout(nextDisplay, 3000);
+    }
+    //Last page-- show Correct, Incorrect, and Unanswered
+    //Click Start Over button to restart 
 
-        //With no user input, it goes to the next question
-        //When time remaining = 0. show correct answer, with no user input, go to next question
-        function youLoseAtTimeOut() {
-            unanswered++;
-            var timeOutText = "<p class='timeOutText text-center'>Time's Up!</p>";
-            $(".mainContent").html(timeOutText);
-            setTimeout(nextDisplay, 3000);
-        }
-        //Last page-- show Correct, Incorrect, and Unanswered
-        //Click Start Over button to restart 
-
-    });
+});
