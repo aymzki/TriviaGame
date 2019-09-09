@@ -1,6 +1,7 @@
 $(document).ready(() => {
-
+   
 //list of variables
+var 
 //var questions = 
 //Click the Start button to begin game
 //Show Time Remaining and Question with 3-4 choices
