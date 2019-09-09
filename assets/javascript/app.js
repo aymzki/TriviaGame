@@ -3,14 +3,14 @@ $(document).ready(() => {
 //list of variables
 var beginGame;
 var gameText;
-var correct = 0;
+var right = 0;
 var wrong = 0;
 var unanswered = 0;
 var questionCounter = 0;
 var countDown = 20;
 var clock;
 var answerChosen;
-var questions = [
+var questionArray = [
     {
         question: "Which of these is a flaky moon-shaped pastry with multiple layers?",
         answers: [
@@ -102,12 +102,65 @@ var questions = [
         ]
     },
 ];
-//Click the Start button to begin game
+
+//function to write the html text for the main content
+
+function generateGameText() {
+    var timeLeftText = "<p class='timerText text-center'>Time Left: <span id='timer'>20</span></p>";
+    var questionText = "<p class='questionText text-center'>" + questionArray[questionCounter].question + "</p>";
+    gameText = timeLeftText + questionText;
+    $(".mainContent").html(gameText);
+    for (var i = 0; i < questionArray[questionCounter].answers.length; i++) {
+        var answerButton = $("<button>");
+        answerButton.addClass("answer btn btn-block text-center");
+        answerButton.attr("isCorrect", questionArray[questionCounter].answers[i].isCorrect);
+        answerButton.html(questionArray[questionCounter].answers[i].text);
+        $(".mainContent").append(answerButton);
+    }
+}
+//Create initial screen and start button
+
+function initialScreen() {
+    var initialText = "<p class='initialText text-center'>Do you know all about bread?</p> <p class='initialText text-center'>There are 10 questions total and you will have 20 seconds to answer each one. Have fun!</p>";
+    var startButtonHTML = "<button class='startButton btn btn-primary btn-lg btn-block text-center' type='button'>Let's get started!</button>";
+    startScreen = initialText + startButtonHTML;
+    $(".mainContent").html(startScreen);
+}
+//Click start button to begin, generates game text, 
+
+$("body").on("click", ".startButton", function(event){ 
+    generateGameText();
+    timer();
+});
+
 //Show Time Remaining and Question with 3-4 choices
 //Upon clicking correct answer, Success!
-//Upon clicking wrong answer, Show correct answer
+function youGotItRight() {
+    right++;
+    var rightAnswerText = "<p class='rightAnswer text-center'>You got it right!</p>";
+    gameText = rightAnswerText;
+    $(".mainContent").html(gameText);
+    setTimeout(nextDisplay, 3000);
+}
+
+//Upon clicking wrong answer, indicate it's wrong. Give user the correct answer.
+function youGotItWrong() {
+    wrong++;
+    var wrongAnswerText = "<p class='wrongAnswer text-center'>Sorry it's wrong!</p>";
+    gameText = wrongAnswerText 
+    $(".mainContent").html(gameText);
+    setTimeout(nextDisplay, 3000); 
+}
+
 //With no user input, it goes to the next question
 //When time remaining = 0. show correct answer, with no user input, go to next question
+function youLoseAtTimeOut() {
+    unanswered++;
+    var timeOutText 
+    var gameText = timeOutText;
+    $(".mainContent").html(gameText);
+    setTimeout(nextDisplay,3000);
+}
 //Last page-- show Correct, Incorrect, and Unanswered
 //Click Start Over button to restart 
 
