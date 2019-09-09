@@ -1,13 +1,13 @@
 $(document).ready(function() {
 
     //list of variables
-    var beginGame;
+    var startScreen;
     var gameText;
-    var right = 0;ß
+    var right = 0;
     var wrong = 0;
     var unanswered = 0;
     var questionCounter = 0;
-    var countDown = 20;
+    var counter = 20;
     var clock;
     var answerChosen;
     var questionArray = [
@@ -34,7 +34,7 @@ $(document).ready(function() {
             answers: [
                 { text: "Stripes of chocolate", isCorrect: false },
                 { text: "Sprinkled sugar", isCorrect: false },
-                { text: "A Mottled crust", isCorrect: true },
+                { text: "A mottled crust", isCorrect: true },
                 { text: "Coarse sea salt exterior", isCorrect: false }
             ]
         },
@@ -122,7 +122,7 @@ $(document).ready(function() {
     //Create initial screen and start button
     function initialScreen() {
         var initialText = "<p class='initialText text-center'>Do you know all about bread?</p> <p class='initialText text-center'>There are 10 questions total and you will have 20 seconds to answer each one. Have fun!</p>";
-        var startButtonHTML = "<button class='startButton btn btn-primary btn-lg btn-block text-center' type='button'>Let's get started!</button>";
+        var startButtonHTML = "<button class='startButton btn btn-group-small my-small-btn text-center' type='button'>Let's get started!</button>";
         startScreen = initialText + startButtonHTML;
         $(".mainContent").html(startScreen);
     }
@@ -145,7 +145,7 @@ $(document).ready(function() {
         }
         else {
             clearInterval(clock);
-            youGotItWrong();ß
+            youGotItWrong();
         }
     });
 
@@ -219,7 +219,7 @@ $(document).ready(function() {
 
 		var endUnansweredHTML = "<p class='endUnanswered text-center'>Unanswered: " + unanswered + "</p>";
 
-		var resetButtonHTML = "<button class='resetButton btn btn-primary btn-lg btn-block text-center' type='button'>PLAY AGAIN</button>";
+		var resetButtonHTML = "<button class='resetButton btn btn-primary btn-sm btn-block text-center' type='button'>PLAY AGAIN</button>";
 
 		gameHTML = finishedText + endRightHTML + endWrongHTML + endUnansweredHTML + resetButtonHTML;
 
@@ -240,8 +240,12 @@ $(document).ready(function() {
 	}
 
     //Click Start button to restart 
-    // When the start button is clicked:
-
+    $("body").on("click", ".resetButton", function(event){
+        resetGame();
+    });
+    
+    
+initialScreen();
 	
 
 
