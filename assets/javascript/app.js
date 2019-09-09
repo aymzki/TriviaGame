@@ -118,8 +118,8 @@ $(document).ready(() => {
             $(".mainContent").append(answerButton);
         }
     }
-    //Create initial screen and start button
 
+    //Create initial screen and start button
     function initialScreen() {
         var initialText = "<p class='initialText text-center'>Do you know all about bread?</p> <p class='initialText text-center'>There are 10 questions total and you will have 20 seconds to answer each one. Have fun!</p>";
         var startButtonHTML = "<button class='startButton btn btn-primary btn-lg btn-block text-center' type='button'>Let's get started!</button>";
@@ -192,8 +192,25 @@ $(document).ready(() => {
 
 	}
 
-
     //Last page-- show Correct, Incorrect, and Unanswered
+    function lastScreen() {
+
+		var finishedText = "<p class='finishedText text-center'>Here's your results!</p>";
+
+		var endRightHTML = "<p class='endRight text-center'>Right Answers: " + right + "</p>";
+
+		var endWrongHTML = "<p class='endWrong text-center'>Wrong Answers: " + wrong + "</p>";
+
+		var endUnansweredHTML = "<p class='endUnanswered text-center'>Unanswered: " + unanswered + "</p>";
+
+		var resetButtonHTML = "<button class='resetButton btn btn-primary btn-lg btn-block text-center' type='button'>PLAY AGAIN</button>";
+
+		gameHTML = finishedText + endRightHTML + endWrongHTML + endUnansweredHTML + resetButtonHTML;
+
+		$(".mainContent").html(gameText);
+
+	}
+
     //Click Start Over button to restart 
 
 });
