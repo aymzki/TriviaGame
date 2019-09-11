@@ -155,6 +155,7 @@ $(document).ready(function() {
             console.log(correctAnswer);
             clearInterval(clock);
             youGotItWrong(correctAnswer);
+            //youLoseAtTimeOut(correctAnswer);
         }
     });
 
@@ -201,9 +202,10 @@ $(document).ready(function() {
     function youLoseAtTimeOut() {
         unanswered++;
         var timeOutText = "<p class='timeOutText text-center'>Time's Up!</p>";
-        //var actualAnswerText = 
+
+        gameText = timeOutText
         $(".mainContent").html(timeOutText);
-        //$(".mainContent").text("Your actual answer is " +  )
+        //$(".mainContent").append("The actual answer is: " + answer);
         setTimeout(nextDisplay, 5000);
     }
 
