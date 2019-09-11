@@ -95,7 +95,7 @@ $(document).ready(function() {
         {
             question: "Fairy bread is Australian style toast topped with butter or margarine and",
             answers: [
-                { text: "Rainbown sprinkles", isCorrect: true },
+                { text: "Rainbow sprinkles", isCorrect: true },
                 { text: "Nutella", isCorrect: false },
                 { text: "Powdered sugar", isCorrect: false },
                 { text: "Peanut butter", isCorrect: false }
@@ -117,11 +117,12 @@ $(document).ready(function() {
             answerButton.html(questionArray[questionCounter].answers[i].text);
             $(".mainContent").append(answerButton);
         }
+        
     }
 
     //Create initial screen and start button
     function initialScreen() {
-        var initialText = "<p class='initialText text-center'>Do you know all about bread?</p> <p class='initialText text-center'>In this qiuz there are 10 questions total and you will have 20 seconds to answer each one.</p>";
+        var initialText = "<p class='initialText text-center'>Do you know all about bread?</p> <p class='initialText text-center'>In this quiz there are 10 questions total. You will have 20 seconds to answer each.</p>";
         var startButtonHTML = "<button class='startButton btn-lg text-center' type='button'>Let's get started!</button>";
         startScreen = initialText + startButtonHTML;
         $(".mainContent").html(startScreen);
@@ -144,8 +145,16 @@ $(document).ready(function() {
             youGotItRight();
         }
         else {
+            var correctAnswer;
+            for (var i=0; i< questionArray[questionCounter].answers.length; i++) {
+                if (questionArray[questionCounter].answers[i].isCorrect == true){
+                    correctAnswer = questionArray[questionCounter].answers[i].text
+                }
+
+            }
+            console.log(correctAnswer);
             clearInterval(clock);
-            youGotItWrong();
+            youGotItWrong(correctAnswer);
         }
     });
 
@@ -158,7 +167,8 @@ $(document).ready(function() {
                 clearInterval(clock);
                 youLoseAtTimeOut();
 
-            } else if (counter > 0) {
+            } 
+            else if (counter > 0) {
                 counter--;
             }
             $("#timer").html(counter);
@@ -175,35 +185,41 @@ $(document).ready(function() {
         setTimeout(nextDisplay, 3000);
     }
 
-    //Upon clicking wrong answer, indicate it's wrong. Give user the correct answer.
-    function youGotItWrong() {
+    //Upon clicking wrong answer, indicate it's wrong. ***Give user the correct answer.
+    function youGotItWrong(answer) { 
         wrong++;
         var wrongAnswerText = "<p class='wrongAnswer text-center'>Wrong Answer!</p>";
-        gameText = wrongAnswerText
+        
+        gameText = wrongAnswerText 
         $(".mainContent").html(wrongAnswerText);
-        setTimeout(nextDisplay, 3000);
+        $(".mainContent").append("The actual answer is " + answer);
+        setTimeout(nextDisplay, 5000);
+
     }
 
     //When time remaining = 0. show correct answer, with no user input, go to next question
     function youLoseAtTimeOut() {
         unanswered++;
         var timeOutText = "<p class='timeOutText text-center'>Time's Up!</p>";
+        //var actualAnswerText = 
         $(".mainContent").html(timeOutText);
-        setTimeout(nextDisplay, 3000);
+        //$(".mainContent").text("Your actual answer is " +  )
+        setTimeout(nextDisplay, 5000);
     }
 
     
     //With no user input, it goes to the next question, increments question counter, reset timer
     function nextDisplay() {
-
+       
 		if (questionCounter < questionArray.length - 1) {
             questionCounter++;
             generateGameText();
             counter = 20;
             timer();
-            //need help moving onto the last screen!!!
 
         } 
+
+        //otherwise, go on to the final screen--need help here!!!
         else {
             lastScreen();
 		}
@@ -213,7 +229,7 @@ $(document).ready(function() {
     //Last page-- show Right, Wrong, and Unanswered
     function lastScreen() {
 
-		var finishedText = "<p class='finishedText text-center'>Here are your results!</p>";
+		var finishedText = "<p class='finishedText text-center'>You finished! Here are your results!</p>";
 
 		var endRightHTML = "<p class='endRight text-center'>Right Answers: " + right + "</p>";
 
@@ -223,7 +239,7 @@ $(document).ready(function() {
 
 		var resetButtonHTML = "<button class='resetButton btn btn-info btn-lg text-center' type='button'>PLAY AGAIN</button>";
 
-        gameHTML = finishedText + endRightHTML + endWrongHTML + endUnansweredHTML + 
+        gameText = finishedText + endRightHTML + endWrongHTML + endUnansweredHTML + 
         
         resetButtonHTML;
 
