@@ -1,4 +1,4 @@
-$(document).ready(function() {
+$(document).ready(function () {
 
     //list of variables
     var startScreen;
@@ -117,7 +117,7 @@ $(document).ready(function() {
             answerButton.html(questionArray[questionCounter].answers[i].text);
             $(".mainContent").append(answerButton);
         }
-        
+
     }
 
     //Create initial screen and start button
@@ -136,18 +136,18 @@ $(document).ready(function() {
 
     // When an answer is clicked:
 
-	$("body").on("click", ".answer", function(event){
+    $("body").on("click", ".answer", function (event) {
         answerChosen = $(this).attr("isCorrect");
         console.log(answerChosen);
-        
+
         if (answerChosen === "true") {
             clearInterval(clock);
             youGotItRight();
         }
         else {
             var correctAnswer;
-            for (var i=0; i< questionArray[questionCounter].answers.length; i++) {
-                if (questionArray[questionCounter].answers[i].isCorrect == true){
+            for (var i = 0; i < questionArray[questionCounter].answers.length; i++) {
+                if (questionArray[questionCounter].answers[i].isCorrect == true) {
                     correctAnswer = questionArray[questionCounter].answers[i].text
                 }
 
@@ -162,13 +162,21 @@ $(document).ready(function() {
     //Set up timer for 20 seconds
 
     function timer() {
-        clock = setInterval(twentySeconds, 1000 * 2);
+        clock = setInterval(twentySeconds, 1000);
         function twentySeconds() {
             if (counter === 0) {
-                clearInterval(clock);
-                youLoseAtTimeOut();
+                var correctAnswer;
+                for (var i = 0; i < questionArray[questionCounter].answers.length; i++) {
+                    if (questionArray[questionCounter].answers[i].isCorrect == true) {
+                        correctAnswer = questionArray[questionCounter].answers[i].text
+                    }
 
-            } 
+                }
+                console.log(correctAnswer);
+                clearInterval(clock);
+                youLoseAtTimeOut(correctAnswer);
+
+            }
             else if (counter > 0) {
                 counter--;
             }
@@ -187,11 +195,11 @@ $(document).ready(function() {
     }
 
     //Upon clicking wrong answer, indicate it's wrong. ***Give user the correct answer.
-    function youGotItWrong(answer) { 
+    function youGotItWrong(answer) {
         wrong++;
         var wrongAnswerText = "<p class='wrongAnswer text-center'>Wrong Answer!</p>";
-        
-        gameText = wrongAnswerText 
+
+        gameText = wrongAnswerText
         $(".mainContent").html(wrongAnswerText);
         $(".mainContent").append("The actual answer is: " + answer);
         setTimeout(nextDisplay, 5000);
@@ -199,76 +207,76 @@ $(document).ready(function() {
     }
 
     //When time remaining = 0. show correct answer, with no user input, go to next question
-    function youLoseAtTimeOut() {
+    function youLoseAtTimeOut(answer) {
         unanswered++;
         var timeOutText = "<p class='timeOutText text-center'>Time's Up!</p>";
 
         gameText = timeOutText
         $(".mainContent").html(timeOutText);
-        //$(".mainContent").append("The actual answer is: " + answer);
+        $(".mainContent").append("The actual answer is: " + answer);
         setTimeout(nextDisplay, 5000);
     }
 
-    
+
     //With no user input, it goes to the next question, increments question counter, reset timer
     function nextDisplay() {
-       
-		if (questionCounter < questionArray.length - 1) {
+
+        if (questionCounter < questionArray.length - 1) {
             questionCounter++;
             generateGameText();
             counter = 20;
             timer();
 
-        } 
+        }
 
         //otherwise, go on to the final screen--need help here!!!
         else {
             lastScreen();
-		}
+        }
 
-	}
+    }
 
     //Last page-- show Right, Wrong, and Unanswered
     function lastScreen() {
 
-		var finishedText = "<p class='finishedText text-center'>You finished! Here are your results!</p>";
+        var finishedText = "<p class='finishedText text-center'>You finished! Here are your results!</p>";
 
-		var endRightHTML = "<p class='endRight text-center'>Right Answers: " + right + "</p>";
+        var endRightHTML = "<p class='endRight text-center'>Right Answers: " + right + "</p>";
 
-		var endWrongHTML = "<p class='endWrong text-center'>Wrong Answers: " + wrong + "</p>";
+        var endWrongHTML = "<p class='endWrong text-center'>Wrong Answers: " + wrong + "</p>";
 
-		var endUnansweredHTML = "<p class='endUnanswered text-center'>Unanswered: " + unanswered + "</p>";
+        var endUnansweredHTML = "<p class='endUnanswered text-center'>Unanswered: " + unanswered + "</p>";
 
-		var resetButtonHTML = "<button class='resetButton btn btn-info btn-lg text-center' type='button'>PLAY AGAIN</button>";
+        var resetButtonHTML = "<button class='resetButton btn btn-info btn-lg text-center' type='button'>PLAY AGAIN</button>";
 
-        gameText = finishedText + endRightHTML + endWrongHTML + endUnansweredHTML + 
-        
-        resetButtonHTML;
+        gameText = finishedText + endRightHTML + endWrongHTML + endUnansweredHTML +
 
-		$(".mainContent").html(gameText);
+            resetButtonHTML;
+
+        $(".mainContent").html(gameText);
 
     }
-    
+
     //reset game
     function resetGame() {
-		questionCounter = 0;
+        questionCounter = 0;
         correct = 0;
         incorrect = 0;
         unanswered = 0;
         counter = 20;
 
-		generateGameText();
+        generateGameText();
         timer();
-	}
+    }
 
     //Click Start button to restart 
-    $("body").on("click", ".resetButton", function(event){
+    $("body").on("click", ".resetButton", function (event) {
         resetGame();
     });
-    
-    
-initialScreen();
-	
+
+
+    initialScreen();
+
 
 
 });
