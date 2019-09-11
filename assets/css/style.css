@@ -18,7 +18,24 @@ button{
     display: flex;
     justify-content: center;
 
-  }
+}
+
+.resetButton{
+    margin: 0 auto;
+    width: 200px;
+    color: black;
+    display: flex;
+    justify-content: center;
+
+}
+
+.answer{
+    
+    width: 200px;
+    color: black;
+    display: flex;
+    justify-content: space-around;
+}
 
 .mainContent{
     color: white;

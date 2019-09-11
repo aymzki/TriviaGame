@@ -192,7 +192,7 @@ $(document).ready(function() {
         
         gameText = wrongAnswerText 
         $(".mainContent").html(wrongAnswerText);
-        $(".mainContent").append("The actual answer is " + answer);
+        $(".mainContent").append("The actual answer is: " + answer);
         setTimeout(nextDisplay, 5000);
 
     }
