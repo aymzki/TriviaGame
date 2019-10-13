@@ -1,9 +1,9 @@
-# TriviaGame
+# Are You Bready?
 
 A trivia game using jQuery timer that tests the user's knowledge on bread. 
 
 
-## How It Works
+## How To Use
 
 * In this quiz there are 10 questions total. 
 * You will have 20 seconds to answer each question. There will be a countdown at the top of each question.
@@ -14,9 +14,8 @@ A trivia game using jQuery timer that tests the user's knowledge on bread.
 * There will be a restart button to click to start the game again without refreshing the page.
 
 
-## Motivation
-
-Assigment in Coding Bootcamp; testing out skills and knowledge.
+## How It Works
+JavaScript timer functions are used for each question and jQuery is used to dynamically generate HTML.
 
 ## Built With
 
